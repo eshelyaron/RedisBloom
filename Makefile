@@ -34,7 +34,7 @@ endif
 ROOT=$(shell pwd)
 
 LDFLAGS = -lm -lc
-CPPFLAGS += -I$(ROOT)/contrib -I$(ROOT) -I$(ROOT)/src -I$(ROOT)/deps/t-digest-c/src
+CPPFLAGS += -I$(ROOT)/contrib -I$(ROOT) -I$(ROOT)/src -I$(ROOT)/deps/t-digest-c/src -I$(ROOT)/deps/Prefix-Filter/Tests -I$(ROOT)/deps/Prefix-Filter/Prefix-Filter
 SRCDIR := $(ROOT)/src
 MODULE_OBJ = $(SRCDIR)/rebloom.o
 MODULE_SO = $(ROOT)/redisbloom.so
@@ -63,6 +63,9 @@ DEPS_TEST = $(ROOT)/contrib/MurmurHash2.o \
 	   $(SRCDIR)/rm_cms.o \
 	   $(SRCDIR)/cms.o
 
+DEPS_PF = $(ROOT)/deps/Prefix-Filter/Prefix-Filter/Shift_op.o \
+	$(ROOT)/deps/Prefix-Filter/Prefix-Filter/min_pd256.o
+
 export
 
 ifeq ($(COV),1)
@@ -72,7 +75,7 @@ endif
 
 all: $(MODULE_SO)
 
-$(MODULE_SO): $(MODULE_OBJ) $(DEPS) $(LIBTDIGEST)
+$(MODULE_SO): $(MODULE_OBJ) $(DEPS) $(LIBTDIGEST) $(DEPS_PF)
 	$(LD) $^ -o $@ $(SHOBJ_LDFLAGS) $(MODULE_LDFLAGS)
 
 $(LIBTDIGEST):

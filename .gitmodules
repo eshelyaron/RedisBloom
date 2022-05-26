@@ -5,3 +5,6 @@
 	path = deps/t-digest-c
 	url = https://github.com/RedisBloom/t-digest-c
 	branch = v0.4.1
+[submodule "deps/Prefix-Filter"]
+	path = deps/Prefix-Filter
+	url = https://github.com/TomerEven/Prefix-Filter.git
